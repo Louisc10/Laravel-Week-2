@@ -13,4 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'RouteController@welcomePage');
+Route::get('/', 'BookController@index');
+
+Route::get('/id/{id}', [
+    'uses' => 'BookController@showOne'
+]);

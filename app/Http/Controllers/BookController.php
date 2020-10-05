@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\books;
+use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Ramsey\Uuid\Type\Integer;
 
-class BooksController extends Controller
+class BookController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +17,21 @@ class BooksController extends Controller
     public function index()
     {
         //
+
+        $books = Book::all();
+        return view('layout/allBook',['books' => $books]);
+    }
+
+    public function showOne(int $id)
+    {
+        //
+
+        $book = DB::table('books')
+                    ->where('id', $id)
+                    ->first();
+
+        // echo $book->title;
+        return view('layout/oneBook',['item' => $book]);
     }
 
     /**
@@ -44,7 +61,7 @@ class BooksController extends Controller
      * @param  \App\Models\books  $books
      * @return \Illuminate\Http\Response
      */
-    public function show(books $books)
+    public function show(Book $books)
     {
         //
     }
@@ -52,10 +69,10 @@ class BooksController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\books  $books
+     * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function edit(books $books)
+    public function edit(Book $books)
     {
         //
     }
@@ -64,10 +81,10 @@ class BooksController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\books  $books
+     * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, books $books)
+    public function update(Request $request, Book $books)
     {
         //
     }
@@ -78,7 +95,7 @@ class BooksController extends Controller
      * @param  \App\Models\books  $books
      * @return \Illuminate\Http\Response
      */
-    public function destroy(books $books)
+    public function destroy(Book $books)
     {
         //
     }
